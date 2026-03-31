@@ -31,6 +31,11 @@
                 margin:10px;
                 text-align:center;
             }
+<<<<<<< HEAD
+=======
+
+            
+>>>>>>> ha
         </style>
     </head>
     <body>

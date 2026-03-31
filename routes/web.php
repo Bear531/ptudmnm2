@@ -39,8 +39,14 @@ use App\Http\Controllers\MovieController;
 route::get('/runtime', 'App\Http\Controllers\btn@runtime');
 
 #btn 2
-Route::get('/sach/{id?}', 'App\Http\Controllers\ViDuLayoutController@sach'); // ? là chỉ định id có thể có hoặc không (tuỳ chọn)
-Route::get('sach/chitiet/{id}','App\Http\Controllers\ViduLayoutController@chitiet');
+Route::get('/','App\Http\Controllers\ViDuLayoutController@sach'); // ? là chỉ định id có thể có hoặc không (tuỳ chọn)
+Route::get('/accountpanel','App\Http\Controllers\AccountController@accountpanel')->middleware('auth')->name("account"); //cập nhật thông tin người dùng
+Route::post('/saveaccountinfo','App\Http\Controllers\AccountController@saveaccountinfo')->middleware('auth')->name('saveinfo');
+Route::get('/book/list','App\Http\Controllers\BookController@booklist')->middleware('auth')->name("booklist"); //thêm để chạy được phần thông tin tài khoản
+
+
+Route::get('/chitiet/{id}','App\Http\Controllers\ViDuLayoutController@chitiet');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
