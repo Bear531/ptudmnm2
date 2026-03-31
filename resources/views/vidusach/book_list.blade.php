@@ -28,7 +28,7 @@
                 <td>{{$row->tac_gia}}</td>
                 <td>{{$row->hinh_thuc_bia}}</td>
                 <td>{{$row->gia_ban}}</td>
-                <td><img src="{{$row->link_anh_bia}}" width="50px"></td>
+                <td><img src="{{$row->link_anh_bia??$row->file_anh_bia}}" width="50px"></td>
                 <td>
                     <div class="btn-group">
                         <a href="{{ url('/bookedit/' . $row->id) }}" class="btn btn-primary btn-sm">Sửa</a>
