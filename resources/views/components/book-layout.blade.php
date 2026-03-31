@@ -1,77 +1,98 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>{{$title}}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            /* Định dạng màu nền và màu chữ của menu */
+            .navbar {
+                background-color: #ff5850;
+                max-width:1000px;
+                font-weight:bold;
+                margin:0 auto;
 
-<head>
-    <title>{{$title}}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <style>
-        .navbar {
-            background-color: #ff5850;
-            font-weight: bold;
-            padding: 0;
-        }
-
-        .nav-item a {
-            color: #fff !important;
-            padding-left: 15%;
-        }
-
-        .active {
-            background-color: #c74740ff;
-        }
-
-        .navbar-nav {
-            width: 100%;
-        }
-
-        .list_book {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 0 5px 0 0;
-            /* border: 1px solid black;  */
-        }
-
-        .book {
-            text-align: center;
-
-            /* border: 1px solid black; */
-            & a {
-                text-decoration: none;
-                color: black;
             }
-        }
+            .nav-item a
+            {
+                color: #fff!important;
+            }
 
-        .col-9 {
-            margin-top: 2vh;
-            margin-bottom: 5vh;
-        }
-    </style>
-</head>
-
-<body>
-    <header style='text-align:center'>
-        <img src='{{asset('image/banner_sach.jpg')}}' width=1000px height=auto>
-    </header>
-    <main style="width:1000px; margin:2px auto;">
-        <div class='row'>
-            <div class='col-3 pr-0'>
-                <nav class='navbar navbar-light'>
-                    <ul class='navbar-nav'>
-                        <li class='nav-item <?= parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) == '/sach' ? 'active' : '' ?>'> <a class='nav-link' href="{{url('sach/')}}">Trang chủ</a> </li>
-                        <li class='nav-item <?= parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) == '/sach/1' ? 'active' : '' ?>'> <a class='nav-link' href='{{url("sach/1")}}'>Tiểu thuyết</a></li>
-                        <li class='nav-item <?= parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) == '/sach/2' ? 'active' : '' ?>'> <a class='nav-link' href='{{url("sach/2")}}'>Truyện ngắn - tản văn</a></li>
-                        <li class='nav-item <?= parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) == '/sach/3' ? 'active' : '' ?>'> <a class='nav-link' href='{{url("sach/3")}}'>Tác phẩm kinh điển</a></li>
-                    </ul>
-                </nav>
-                <img src={{asset('image/sidebar_1.jpg')}} width=100% class='mt-1'>
-                <img src={{asset('image/sidebar_2.jpg')}} width=100% class='mt-1'>
+            .list-book
+            {
+                display:grid;
+                grid-template-columns:repeat(5,20%);
+            }
+            .book
+            {
+            
+                margin:10px;
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body>
+        <header style='text-align:center'>
+            <img src="{{asset('images/banner_sach.jpg')}}" width="1000px">
+            <nav class="navbar navbar-light navbar-expand-sm">
+                <div class='container-fluid p-0'>
+                    <div class='col-9 p-0'>
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{url('sach')}}">Trang chủ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url('sach/theloai/1')}}">Tiểu thuyết</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url('sach/theloai/2')}}">Truyện ngắn - tản văn</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url('sach/theloai/3')}}">Tác phẩm kinh điển</a>
+                                </li>
+                            </ul>
+                    </div>
+                    <div class='col-3 p-0 d-flex justify-content-end'>
+                        @auth
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                {{ Auth::user()->name }}
+                                </button>
+                                <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{route('account')}}">Quản lý</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a class="dropdown-item" onclick="event.preventDefault();
+                                                        this.closest('form').submit();">Đăng xuất</a>
+                                </form>
+                                </div>
+                            </div>
+                        @else
+                            <a href="{{ route('login') }}">
+                                <button class='btn btn-sm btn-primary'>Đăng nhập</button>
+                            </a>&nbsp;
+                            <a href="{{ route('register') }}">
+                                <button class='btn btn-sm btn-success'>Đăng ký</button>
+                            </a>
+                        @endauth
+                </div>
+            </nav>
+        </header>
+        <main style="width:1000px; margin:2px auto;">
+            <div class='row'>
+                <div class='col-12'>
+                   {{$slot}}
+                </div>
             </div>
-            <div class='col-9'>
-                {{$content}}
+        </main>
+        <!--<footer>
+            <div class='row' style='text-align:center'>
+                <div class='col-4'>TRỤ SỞ</div>
+                <div class='col-4'>THÔNG TIN CHUNG</div>
+                <div class='col-4'>BẢN ĐỒ</div>
             </div>
-        </div>
-    </main>
-</body>
-
+        </footer>-->
+    </body>
 </html>
