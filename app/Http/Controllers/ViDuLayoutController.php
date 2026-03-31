@@ -13,11 +13,11 @@ function sach($id = null)
         } else {
             $data_sach = DB::select("select * from sach order by gia_ban asc limit 0,8");
         }
-        return view('index', compact('data_sach', 'id'));
+        return view('vidusach.index', compact('data_sach', 'id'));
     }
     function chitiet($id)
     {
         $data = DB::select("select * from sach where id = ?", [$id])[0]; //DB::table("sach")->where("id",$id)->first();
-        return view("chitiet", compact("data"));
+        return view("vidusach.chitiet", compact("data"));
     }
 }
