@@ -54,3 +54,24 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route:: get('/accountpanel' , 'App\Http\Controllers\AccountController@accountpanel' )
+->middleware('auth' ) ->name("account");
+
+Route:: get('/booklist' , 'App\Http\Controllers\BookController@bookList' )
+->middleware('auth' ) ->name("booklist");
+
+Route:: get('/bookcreate' , 'App\Http\Controllers\BookController@bookCreate' )
+->middleware('auth' ) ->name("bookcreate");
+Route:: get('/bookedit/{id}' , 'App\Http\Controllers\BookController@bookEdit' )
+->middleware('auth' ) ->name("bookedit");
+Route:: post('/bookdelete' , 'App\Http\Controllers\BookController@bookDelete' )
+->middleware('auth' ) ->name("bookdelete");
+Route:: get('/booksave/{action}' , 'App\Http\Controllers\BookController@bookSave' )
+->middleware('auth' ) ->name("booksave");
+Route:: post('/booksave/{action}' , 'App\Http\Controllers\BookController@bookSave' )
+->middleware('auth' ) ->name("booksave");
+
+
+
+
+
