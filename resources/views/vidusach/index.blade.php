@@ -9,6 +9,7 @@
         sách
     </x-slot>
 
+    <x-slot name="content">
     <div class='list-book'>
         @foreach($data_sach as $row)
         <div class='book'>
@@ -20,6 +21,7 @@
         </div>
         @endforeach
     </div>
+    </x-slot>
 
 </x-book-layout>
 <style>

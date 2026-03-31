@@ -61,7 +61,7 @@ class BookController extends Controller
             $file = $request->file('file_anh_bia');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('uploads/books'), $fileName); // Lưu vào public/uploads/books
-            $data['file_anh_bia'] = 'uploads/books/' . $fileName; // Giả sử cột trong DB tên là hinh_anh
+            $data['file_anh_bia'] = 'uploads/books/' . $fileName;
         } elseif ($request->input('link_anh_bia')) {
             $data['link_anh_bia'] = $request->input('link_anh_bia');
         }

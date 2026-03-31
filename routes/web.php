@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/yen', function () {
     return "Hello Yen"; #dòng này để cố ý tạo xung đột
@@ -36,16 +36,17 @@ Route::get('/camha', 'App\Http\Controllers\btn@ten');
 
 Route::get('/danhsachtheloaiphim', 'App\Http\Controllers\FilmController@layDanhSachTheLoaiPhim'); #7.1
 use App\Http\Controllers\MovieController;
+
 route::get('/runtime', 'App\Http\Controllers\btn@runtime');
 
 #btn 2
-Route::get('/','App\Http\Controllers\ViDuLayoutController@sach'); // ? là chỉ định id có thể có hoặc không (tuỳ chọn)
-Route::get('/accountpanel','App\Http\Controllers\AccountController@accountpanel')->middleware('auth')->name("account"); //cập nhật thông tin người dùng
-Route::post('/saveaccountinfo','App\Http\Controllers\AccountController@saveaccountinfo')->middleware('auth')->name('saveinfo');
-Route::get('/book/list','App\Http\Controllers\BookController@booklist')->middleware('auth')->name("booklist"); //thêm để chạy được phần thông tin tài khoản
+
+Route::get('/accountpanel', 'App\Http\Controllers\AccountController@accountpanel')->middleware('auth')->name("account"); //cập nhật thông tin người dùng
+Route::post('/saveaccountinfo', 'App\Http\Controllers\AccountController@saveaccountinfo')->middleware('auth')->name('saveinfo');
+Route::get('/book/list', 'App\Http\Controllers\BookController@booklist')->middleware('auth')->name("booklist"); //thêm để chạy được phần thông tin tài khoản
 
 
-Route::get('/chitiet/{id}','App\Http\Controllers\ViDuLayoutController@chitiet');
+Route::get('/chitiet/{id}', 'App\Http\Controllers\ViDuLayoutController@chitiet');
 
 
 Route::get('/dashboard', function () {
@@ -58,26 +59,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route:: get('/accountpanel' , 'App\Http\Controllers\AccountController@accountpanel' )
-->middleware('auth' ) ->name("account");
+Route::get('/accountpanel', 'App\Http\Controllers\AccountController@accountpanel')
+    ->middleware('auth')->name("account");
 
-Route:: get('/booklist' , 'App\Http\Controllers\BookController@bookList' )
-->middleware('auth' ) ->name("booklist");
+Route::get('/booklist', 'App\Http\Controllers\BookController@bookList')
+    ->middleware('auth')->name("booklist");
 
-Route:: get('/bookcreate' , 'App\Http\Controllers\BookController@bookCreate' )
-->middleware('auth' ) ->name("bookcreate");
-Route:: get('/bookedit/{id}' , 'App\Http\Controllers\BookController@bookEdit' )
-->middleware('auth' ) ->name("bookedit");
-Route:: post('/bookdelete' , 'App\Http\Controllers\BookController@bookDelete' )
-->middleware('auth' ) ->name("bookdelete");
-Route:: get('/booksave/{action}' , 'App\Http\Controllers\BookController@bookSave' )
-->middleware('auth' ) ->name("booksave");
-Route:: post('/booksave/{action}' , 'App\Http\Controllers\BookController@bookSave' )
-->middleware('auth' ) ->name("booksave");
-
-
-
-
-
+Route::get('/bookcreate', 'App\Http\Controllers\BookController@bookCreate')
+    ->middleware('auth')->name("bookcreate");
+Route::get('/bookedit/{id}', 'App\Http\Controllers\BookController@bookEdit')
+    ->middleware('auth')->name("bookedit");
+Route::post('/bookdelete', 'App\Http\Controllers\BookController@bookDelete')
+    ->middleware('auth')->name("bookdelete");
+Route::get('/booksave/{action}', 'App\Http\Controllers\BookController@bookSave')
+    ->middleware('auth')->name("booksave");
+Route::post('/booksave/{action}', 'App\Http\Controllers\BookController@bookSave')
+    ->middleware('auth')->name("booksave");
+Route::get('/{id?}', 'App\Http\Controllers\ViDuLayoutController@sach'); // ? là chỉ định id có thể có hoặc không (tuỳ chọn)
